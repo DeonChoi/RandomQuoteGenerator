@@ -1,5 +1,3 @@
-// I am aiming for an "Exceeds Expectation" grade
-
 // Array of quotes objects
 var quotes = [{
         quote: "Have the courage to follow your heart and intuition. They somehow know what you truly want to become.",
@@ -77,22 +75,23 @@ function getRandomQuote() {
     var randNumb = Math.floor((Math.random() * quotes.length));
     return quotes[randNumb];
 }
-//console.log(getRandomQuote());
 
 // function to return a random color from the colors array
 function getRandomColor() {
     var randNumb = Math.floor((Math.random() * colors.length));
     return colors[randNumb];
 }
-//console.log(getRandomColor);
 
 // a function that calls the previous two functions (getRandomColor() and getRandomQuote()) 
 // and publishes those new colors and quotes on to the window for the user to see/
 // Also sets a timer of 15 seconds to randomly change the background colors and quotes
+
+
 function printQuote() {
     document.querySelector("body, button").style.background = getRandomColor();
     document.querySelector("button").style.background = getRandomColor();
-    setInterval(printQuote, 15000)
+
+    clearInterval();
 
     var randQuote = getRandomQuote();
     var newQuote = '';
@@ -110,5 +109,8 @@ function printQuote() {
     document.getElementById("quote-box").innerHTML = newQuote;
 }
 
-document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-//document.getElementById('loadQuote').addEventListener("click", setInterval(printQuote, 15000), false);
+document.getElementById('loadQuote').addEventListener("click", printQuote);
+//automatically loads a new quote every 10 seconds even if button isnt clicked
+document.getElementById('loadQuote').addEventListener("click", setInterval(function() {
+    printQuote();
+}, 10000));
